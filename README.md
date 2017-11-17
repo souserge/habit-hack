@@ -14,8 +14,9 @@ Habit tracking service with social motivation 📈
 #### Run the app on your local machine
 In the project dir `./HabitHack`, run `python3 manage.py startapp main`
 
-#### Specify your name and email in git ( this is necessary to commit)
+#### Specify your name and email in git ( this is necessary for committing)
 `git config --global user.email "you@example.com"`
+
 `git config --global user.name "Your Name"`
 
 #### Save your GH login and password in git (so that you won't have to type it every push/pull)
