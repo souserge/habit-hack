@@ -46,5 +46,3 @@ W3 Schools has a simple but quite readable style guide. These are the links:
   * [HTML Style Guide](https://www.w3schools.com/html/html5_syntax.asp) (CSS conventions are mentined at the end)
   
   
-  
-## TEST: Hello!
