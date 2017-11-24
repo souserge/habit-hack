@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if python3 -c "import django" &> /dev/null; then
+	python3 manage.py runserver
+elif python -c "import django" &> /dev/null; then
+	python manage.py runserver
+else
+	echo "Ooops. It looks like either python of django is not installed..."
+fi
+
+# -- END --
