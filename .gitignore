@@ -1,3 +1,14 @@
+# --- PROJECT IGNORES ---
+
+# IntelliJ IDEA
+.idea/
+
+# MacOS system files
+*.DS_Store
+
+
+# --- GITHUB GENERATED IGNORES ---
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
