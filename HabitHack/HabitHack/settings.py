@@ -124,4 +124,5 @@ STATIC_URL = '/static/'
 
 AUTH_PROFILE_MODULE = 'accounts.UserProfile'
 
-
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'

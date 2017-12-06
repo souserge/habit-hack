@@ -37,4 +37,4 @@ def signup(request):
             return redirect('main:index')
     else:
         form = SignUpForm()
-    return render(request, 'main:signup', {'form': form})
+    return render(request, 'main/signup_form.html', {'form': form})
