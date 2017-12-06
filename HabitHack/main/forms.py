@@ -9,7 +9,7 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea)
     sender = forms.EmailField()
     cc_myself = forms.BooleanField(required=False)
-
+    
 # User sign up form
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
