@@ -13,7 +13,7 @@ urlpatterns = [
     #url(r'^$', views.index),
 
     url(r'^$', views.HomePage.as_view(), name = 'index'),
-
+    url(r'^index/$', views.HomePage.as_view(), name = 'index'),
 
     url(r'^login/$', LoginView.as_view(template_name='main/login_form.html'), name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('main:login')), name='logout'),
