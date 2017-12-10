@@ -24,10 +24,13 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    age = models.DateField()
+    birth_date = models.DateField()
     gender_choice = (('MALE', 'M'), ('FEMALE', 'F'))
     gender = models.CharField(max_length=1, choices=gender_choice)
     profile_photo = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.user.username
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
