@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from django.views import generic
 from django.views.generic.base import TemplateView
-from .forms import SignUpForm
+from .forms import RegistrationForm
 
 # Create your views here.
 # def index(request):
@@ -22,12 +22,12 @@ from .forms import SignUpForm
 #     return render(request, 'index.html', context)
 
 class HomePage(TemplateView):
-    template_name = 'main/index.html'
+    template_name = 'main/index_test.html'
 
 # User sign up view
-def signup(request):
+def register(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -36,5 +36,5 @@ def signup(request):
             login(request, user)
             return redirect('main:index')
     else:
-        form = SignUpForm()
-    return render(request, 'main/signup_form.html', {'form': form})
+        form = RegistrationForm()
+    return render(request, 'main/register_test.html', {'form': form})
