@@ -24,13 +24,16 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     city = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
-    age = models.IntegerField()
+    age = models.DateField()
     gender_choice = (('MALE', 'M'), ('FEMALE', 'F'))
     gender = models.CharField(max_length=1, choices=gender_choice)
+    profile_photo = models.CharField(max_length=500)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
+
 #DO NOT DELETE IT'S IMPORTANT, BUT WE HAVE TO WAIT FOR FURTHER DEVELOPING PROCESS :)
+
 
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
