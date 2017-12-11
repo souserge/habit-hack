@@ -122,7 +122,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_PROFILE_MODULE = 'accounts.UserProfile'
+AUTH_PROFILE_MODULE = 'main.UserProfile'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
