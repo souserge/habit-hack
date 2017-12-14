@@ -21,7 +21,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, related_name='user')
+    user = models.OneToOneField(User, related_name='user', on_delete=models.CASCADE)
     city = models.CharField(max_length=50, default='', blank=True)
     country = models.CharField(max_length=50, default='', blank=True)
     birth_date = models.DateField(blank=True, null=True)
