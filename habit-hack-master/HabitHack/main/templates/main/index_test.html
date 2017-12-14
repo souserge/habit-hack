@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- This is how to add .css to .html -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <!-- .css are located in 'main/static' -->
+
+    <title>Habit Hack</title>
+  </head>
+  <body>
+    <header>
+        <div>
+            <ul>
+            {% if user.is_authenticated %}
+              <p>Welcome, {{ user.get_username }}!</p>
+              <li><a href="{% url "main:logout" %}">Logout</a></li>
+              <li><a href="{% url "main:profile" %}">Profile</a></li>
+              <li><a href="{% url "main:edit_profile" %}">Edit Profile</a></li>
+            {% else %}
+              <p>Welcome, guest! </p>
+              <li><a href="{% url "main:login" %}">Login</a></li>
+              <li><a href="{% url "main:register" %}">Register</a></li>
+            {% endif %}
+            </ul>
+          </div>
+    </header>
+    <h1>Habit Hack</h1>
+    <h2>改善!</h2>
+
+    <!-- DELETE IT -->
+      <p>{{ a_string }}</p>
+      <p>{{ a_number }}</p>
+    <!-- TILL HERE -->
+
+    {# The Document Body #}
+    <div id="site-wrapper">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+  </body>
+</html>
