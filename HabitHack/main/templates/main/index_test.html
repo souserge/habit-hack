@@ -17,10 +17,12 @@
             {% if user.is_authenticated %}
               <p>Welcome, {{ user.get_username }}!</p>
               <li><a href="{% url "main:logout" %}">Logout</a></li>
+              <li><a href="{% url "main:profile" %}">Profile</a></li>
+              <li><a href="{% url "main:edit_profile" %}">Edit Profile</a></li>
             {% else %}
               <p>Welcome, guest! </p>
               <li><a href="{% url "main:login" %}">Login</a></li>
-              <li><a href="{% url "main:signup" %}">Sign Up</a></li>
+              <li><a href="{% url "main:register" %}">Register</a></li>
             {% endif %}
             </ul>
           </div>
