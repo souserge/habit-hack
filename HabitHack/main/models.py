@@ -21,19 +21,19 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    city = models.CharField(max_length=50)
-    country = models.CharField(max_length=50)
-    birth_date = models.DateField()
-    gender_choice = (('MALE', 'M'), ('FEMALE', 'F'))
-    gender = models.CharField(max_length=1, choices=gender_choice)
-    profile_photo = models.CharField(max_length=500)
+    user = models.OneToOneField(User, related_name='user')
+    city = models.CharField(max_length=50, default='', blank=True)
+    country = models.CharField(max_length=50, default='', blank=True)
+    birth_date = models.DateField(blank=True, null=True)
+    gender_choice = (('M', 'Male'), ('F', 'Female'))
+    gender = models.CharField(max_length=1, choices=gender_choice, blank=True)
+    profile_photo = models.CharField(max_length=500, blank=True)
+    #profile_photo = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return self.user.username
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
-
 
 #DO NOT DELETE IT'S IMPORTANT, BUT WE HAVE TO WAIT FOR FURTHER DEVELOPING PROCESS :)
 
