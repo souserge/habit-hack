@@ -11,6 +11,6 @@
     <p>Gender: {{ profile.gender }}</p>
     <p>City: {{ profile.city }}</p>
     <p>Country: {{ profile.country }}</p>
-    <p>Picture: {{ profile.picture }}</p>
+    <p>Picture: <img src="{{ profile.profile_photo.url }}"><img></p>
 </div>
 {% endblock %}

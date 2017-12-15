@@ -1,4 +1,16 @@
 body {
-  background-color: #FF6AD5;
+  background-color: rgb(0, 0, 0);
+  background-image: url("images/trumpet.gif");
+  background-size: 128px;
+  color: rgb(255, 255, 255);
+}
+
+a {
   color: #FFF;
+  text-decoration: none;
+} 
+
+a:visited {
+  color: #FFF;
+  text-decoration: none;
 }

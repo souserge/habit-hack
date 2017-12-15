@@ -23,26 +23,33 @@ class ContactForm(forms.Form):
 #         'email', 'password1', 'password2', )
 
 class RegistrationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 
-        'email', 'password1', 'password2', )
+        fields = [
+            'username', 'first_name', 'last_name', 
+            'email', 'password1', 'password2',
+        ]
+    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+
+
 
 class ProfileEditForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    birth_date = forms.DateField(required=False, help_text='Optional.')
-    gender = forms.ChoiceField(choices=(UserProfile.gender_choice))
-    city = forms.CharField(max_length=50, required=False, help_text='Optional.')
-    country = forms.CharField(max_length=50, required=False, help_text='Optional.')
-    profile_photo = forms.CharField(max_length=500, required=False, help_text='Optional.')
-
     class Meta:
         model = UserProfile
-        fields = ('first_name', 'last_name', 'email',
-        'birth_date', 'gender', 'city', 'country', 'profile_photo', )
+        fields = [
+            # 'first_name', 'last_name', 'email', 
+            'birth_date',
+            'gender', 'city', 'country', 'profile_photo',
+        ]
+
+    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
+    # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    # birth_date = forms.DateField(required=False, help_text='Optional.')
+    # gender = forms.ChoiceField(choices=(UserProfile.gender_choice))
+    # city = forms.CharField(max_length=50, required=False, help_text='Optional.')
+    # country = forms.CharField(max_length=50, required=False, help_text='Optional.')
+    # profile_photo = forms.CharField(max_length=500, required=False, help_text='Optional.')
+

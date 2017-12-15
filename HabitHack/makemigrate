@@ -1,0 +1,14 @@
+#!/bin/bash
+### The script updates the database
+
+if python3 -c "import django" &> /dev/null; then
+	python3 manage.py makemigrations
+	python3 manage.py migrate	
+elif python -c "import django" &> /dev/null; then
+	python manage.py makemigrations
+	python manage.py migrate	
+else
+	echo "Ooops, looks like either python or django is not installed."
+fi
+
+# -- END --

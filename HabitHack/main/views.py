@@ -61,10 +61,10 @@ def profile(request):
 @login_required
 def edit_profile(request):
     if request.method == 'POST':
-        form = ProfileEditForm(request.POST, instance=request.user.profile)
+        form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
 
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             return redirect('main:profile')
         else:
             return render(request, 'main/edit_profile_test.html', {'form': form})
