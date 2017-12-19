@@ -1,10 +1,11 @@
 from django.conf.urls import url
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, path
 from django.contrib.auth.views import(
     LoginView,
     LogoutView,
 )
 from . import views
+
 
 
 app_name = 'main'
@@ -20,7 +21,8 @@ urlpatterns = [
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('main:login')), name='logout'),
 
     url(r'^register/$', views.register, name='register'),
-    url(r'^profile/$', views.profile, name='profile'),
+    # url(r'^profile/$', views.profile, name='profile'),
+    path('user/<username>/', views.profile, name='user'),
     url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
 
 ]

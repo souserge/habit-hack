@@ -6,6 +6,7 @@ from django.views.generic.base import TemplateView
 from .forms import RegistrationForm, ProfileEditForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 
 class HomePage(TemplateView):
@@ -41,8 +42,9 @@ def user_login(request):
     return render(request, 'main/login_test.html', {'form': form})
 
 @login_required
-def profile(request):
-    return render(request, 'main/profile.html', {'user': request.user, 'profile': request.user.profile})
+def profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'main/profile.html', {'user': user, 'profile': user.profile})
 
 @login_required
 def edit_profile(request):
