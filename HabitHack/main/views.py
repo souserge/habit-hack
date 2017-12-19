@@ -23,7 +23,7 @@ from django.contrib.auth.decorators import login_required
 #     return render(request, 'index.html', context)
 
 class HomePage(TemplateView):
-    template_name = 'main/index_test.html'
+    template_name = 'main/index.html'
 
 # User sign up view
 # def register(request):
@@ -56,7 +56,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'main/profile_test.html', {'user': request.user, 'profile': request.user.profile})
+    return render(request, 'main/profile.html', {'user': request.user, 'profile': request.user.profile})
 
 @login_required
 def edit_profile(request):

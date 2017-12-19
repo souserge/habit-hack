@@ -1,16 +1,108 @@
-body {
-  background-color: rgb(0, 0, 0);
-  background-image: url("images/trumpet.gif");
-  background-size: 128px;
-  color: rgb(255, 255, 255);
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-a {
-  color: #FFF;
-  text-decoration: none;
-} 
+#site-wrapper {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "main  "
+    "footer";
+  grid-template-columns: 100fr;
+  grid-template-rows: auto 100fr 42px;
+  grid-gap: 5px;
+  min-height: 100%;
+  height: 100%;
+}
 
-a:visited {
-  color: #FFF;
+
+header {
+  margin: 0;
+  padding: 10px;
+  grid-area: header;
+  color: #0093c4;
+}
+
+h1 {
+  font-weight: 400;
+  padding-left: 10%;
+  display: inline;
+  font-size: 60px;
+}
+
+ul {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+nav {
+  padding-right: 14px;
+  font-size: 24px;
+  float: right;
+  margin-top: 28px;
+}
+
+nav li {
+  float: right;
+}
+
+nav li a {
+  color: #0093c4;
+  display: block;
+  text-align: center;
+  padding: 0 16px;
   text-decoration: none;
+}
+
+nav li {
+  border-left: 1px solid #0093c4;
+}
+
+nav li:first-child {
+  border-left: none;
+}
+
+nav li:last-child {
+  border-left: none;
+}
+
+#underline-header {
+  margin-top: 5px;
+  width: 100%;
+  height: 6px;
+  background-color: #0093c4;
+  display: inline-block;
+}
+
+#login-button a{
+  width: 32px;
+  height: 32px;
+  background-image: url('https://i.imgur.com/iuH0DIJ.jpg');
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+}
+
+footer {
+  grid-area: footer;
+  background: #0093c4;
+  padding: 20px;
+}
+
+#content-wrapper {
+  background-color: rgba(255, 205, 0,.5);
+  margin: 0 10px 10px 10px;
+}
+
+@media screen and (min-width: 1200px) {
+  #content-wrapper {
+    width: 1200px;
+  }
 }

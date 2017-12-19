@@ -18,7 +18,7 @@
   }
   
   #pageContent{
-    grid-area:main;
+    grid-area: main;
     background-color: rgba(255, 205, 0,.5)
   }
   
@@ -71,8 +71,11 @@
       position:absolute;
       margin-left:64px;
       margin-top:18px;
-    }
-  
+      height: 300px;
+      width: 300px;
+      border-radius: 100%;
+      overflow: hidden; 
+    } 
     /* profile name*/
     .Name {
       position:absolute;

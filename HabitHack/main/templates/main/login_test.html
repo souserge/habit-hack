@@ -1,11 +1,9 @@
-{% extends 'main/index_test.html' %}
+{% extends 'main/base.html' %}
 
 {% block content %}
-<div>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-</div>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
 {% endblock %}
