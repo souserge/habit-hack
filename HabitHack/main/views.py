@@ -9,8 +9,11 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 
-class HomePage(TemplateView):
-    template_name = 'main/index.html'
+def index(request):
+    login_form = LoginForm()
+    register_form = RegistrationForm()
+    return render(request, 'main/index.html', {'login_form': login_form, 'register_form' : register_form}) 
+
 
 def register(request):
     if request.method == 'POST':

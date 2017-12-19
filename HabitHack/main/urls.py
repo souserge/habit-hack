@@ -13,8 +13,9 @@ urlpatterns = [
     #url(r'^index/', views.index),
     #url(r'^$', views.index),
 
-    url(r'^$', views.HomePage.as_view(), name = 'index'),
-    url(r'^index/$', views.HomePage.as_view(), name = 'index'),
+    url(r'^$', views.index, name = 'index'),
+    #url(r'^index/$', views.HomePage.as_view(), name = 'index'),
+    url(r'^index/$', views.index, name = 'index'),
 
     #url(r'^login/$', LoginView.as_view(template_name='main/login_test.html'), name='login'),
     url(r'^login/$', views.user_login, name='login'),

@@ -2,4 +2,14 @@
 
 {% block content %}
  <h2>Content will be here, soon!</h2>
+ <form action="login/" method="post">
+    {% csrf_token %}
+    {{ login_form.as_p }}
+    <button type="submit">Login</button>
+</form>
+<form action="register/" method="post">
+    {% csrf_token %}
+    {{ register_form.as_p }}
+    <button type="submit">Register</button>
+</form>
 {% endblock %}
