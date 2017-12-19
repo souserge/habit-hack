@@ -19,8 +19,8 @@ class RegistrationForm(UserCreationForm):
         ]
         widgets = {
             'username' : forms.TextInput(attrs={'placeholder' : 'Username'}),
-            'password1' : forms.PasswordInput(attrs={'placeholder' : 'Password'}),
-            'password2' : forms.PasswordInput(attrs={'placeholder' : 'ConfirmPassword'}),
+            #'password1' : forms.PasswordInput(attrs={'placeholder' : 'Password'}),
+            #'password2' : forms.PasswordInput(attrs={'placeholder' : 'ConfirmPassword'}),
             'email' : forms.EmailInput(attrs={'placeholder' : 'Email'})
         }
 
@@ -30,6 +30,8 @@ class RegistrationForm(UserCreationForm):
         for fieldname in ['username', 'password1', 'password2', 'email']:
             self.fields[fieldname].help_text = None
             self.fields[fieldname].label = ""
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password'})
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
