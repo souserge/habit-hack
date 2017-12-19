@@ -15,7 +15,8 @@ urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name = 'index'),
     url(r'^index/$', views.HomePage.as_view(), name = 'index'),
 
-    url(r'^login/$', LoginView.as_view(template_name='main/login_test.html'), name='login'),
+    #url(r'^login/$', LoginView.as_view(template_name='main/login_test.html'), name='login'),
+    url(r'^login/$', views.user_login, name='login'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('main:login')), name='logout'),
 
     url(r'^register/$', views.register, name='register'),

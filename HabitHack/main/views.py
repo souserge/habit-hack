@@ -3,8 +3,9 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from django.views import generic
 from django.views.generic.base import TemplateView
-from .forms import RegistrationForm, ProfileEditForm
+from .forms import RegistrationForm, ProfileEditForm, LoginForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 
 
 class HomePage(TemplateView):
@@ -23,6 +24,21 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'main/register_test.html', {'form': form})
+
+def user_login(request):
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('main:index')
+        else:
+            return HttpResponse("Error in logging in")
+    else:
+        form = LoginForm()
+    return render(request, 'main/login_test.html', {'form': form})
 
 @login_required
 def profile(request):
