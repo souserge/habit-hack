@@ -11,29 +11,25 @@ class ContactForm(forms.Form):
     sender = forms.EmailField()
     cc_myself = forms.BooleanField(required=False)
 
-# User sign up form
-# class RegistrationForm(UserCreationForm):
-#     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-#     last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-#     email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-
-#     class Meta:
-#         model = User
-#         fields = ('username', 'first_name', 'last_name', 
-#         'email', 'password1', 'password2', )
-
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = [
-            'username', 'first_name', 'last_name', 
-            'email', 'password1', 'password2',
+            'username',  'password1', 'password2', 'email',
         ]
-    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+        widgets = {
+            'username' : forms.TextInput(attrs={'placeholder' : 'Username'}),
+            'password1' : forms.PasswordInput(attrs={'placeholder' : 'Password'}),
+            'password2' : forms.PasswordInput(attrs={'placeholder' : 'ConfirmPassword'}),
+            'email' : forms.EmailInput(attrs={'placeholder' : 'Email'})
+        }
 
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
 
+        for fieldname in ['username', 'password1', 'password2', 'email']:
+            self.fields[fieldname].help_text = None
+            self.fields[fieldname].label = ""
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
@@ -43,13 +39,4 @@ class ProfileEditForm(forms.ModelForm):
             'birth_date',
             'gender', 'city', 'country', 'profile_photo',
         ]
-
-    # first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    # email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
-    # birth_date = forms.DateField(required=False, help_text='Optional.')
-    # gender = forms.ChoiceField(choices=(UserProfile.gender_choice))
-    # city = forms.CharField(max_length=50, required=False, help_text='Optional.')
-    # country = forms.CharField(max_length=50, required=False, help_text='Optional.')
-    # profile_photo = forms.CharField(max_length=500, required=False, help_text='Optional.')
 
