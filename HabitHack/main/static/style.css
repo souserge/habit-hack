@@ -101,8 +101,10 @@ footer {
   margin: 0 10px 10px 10px;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1300px) {
   #content-wrapper {
-    width: 1200px;
+    width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
