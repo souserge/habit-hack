@@ -16,13 +16,12 @@
                 <h1>HabitHack</h1>
             <nav>
                 <ul>
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                     <li id="login-button"><a href="{% url "main:logout" %}">
                     </a></li>
                     <li><a href="{% url 'main:user' username=request.user.username %}">Profile</a></li>
                     <li><a>Groups</a></li>
-                    <li><a>Home</a></li>
-                    <!-- <li><a href="{% url "main:edit_profile" %}">Edit Profile</a></li> -->
+                    <li><a href="{% url 'main:home' %}">Home</a></li>
                 {% else %}
                     <li>for active people who want to keep track of their routines</li>
                 {% endif %}

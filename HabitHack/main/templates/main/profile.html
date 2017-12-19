@@ -2,50 +2,61 @@
 {% load staticfiles %}
 
 {% block extra_head %}
-<link rel="stylesheet"  type="text/css" href="{% static 'ProfilePage.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="Photo">
-        <!--profile photo-->
-        <img src="{{ profile.profile_photo.url }}"></img></div>
+  <!--profile photo-->
+  <img src="{{ profile.profile_photo.url }}"></img></div>
 <div class="Name"><!--username-->{{ user.first_name }} {{ user.last_name }}</div>
 <div class="Town-country"><!--user location-->{{ profile.city }}, {{ profile.country }}</div>
 <div class="desc">
-        <!--profile description-->
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Praesent varius auctor sem in pulvinar. Nullam ac mattis ante. 
+  <!--profile description-->
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+  Praesent varius auctor sem in pulvinar. Nullam ac mattis ante. 
 </div>
+{% if request.user != user %}
 <div class="mssg_button">
-        <div class="mssg_text">
-                Send message
-        <!--mail icon-->
-        <div class="mssg_img">
-        <img src="https://i.imgur.com/SeiqqQj.png"
-        width="32" height="24" /></div>
-        </div>
+  <div class="mssg_text">
+    Send message
+  <!--mail icon-->
+  <div class="mssg_img">
+  <img src="https://i.imgur.com/SeiqqQj.png"
+  width="32" height="24" /></div>
+  </div>
 </div>
+{% endif %}
 <div class="groups_button">
-        <div class="button_text">
-              <div class="big_text">
-              <!--number of groups-->
-                34      
-              </div>
-        groups
-        </div>
+  <div class="button_text">
+    <div class="big_text">
+      <!--number of groups-->
+      34      
+    </div>
+    groups
+  </div>
 </div>
 <div class="friends_button">
-        <div class="button_text">
-              <div class="big_text">
-              <!--number of friends-->
-                34
-              </div> 
-        friends
-        </div>
+  <div class="button_text">
+    <div class="big_text">
+      <!--number of friends-->
+      34
+    </div> 
+    friends
+  </div>
 </div>
-<div class="fb_add_button">
-        <div class="fb_add_text">
-                Add me on Facebook
-        </div>
-</div>
+{% if request.user != user %}
+  <div class="fb_add_button">
+    <div class="fb_add_text">
+      Add me on Facebook
+    </div>
+  </div>
+{% else %}
+  <a href="{% url 'main:edit_user' %}"><div class="edit_button">
+    <div class="button_text">
+      Settings
+    </div>
+  </div></a>
+{% endif %}
+
 {% endblock %}

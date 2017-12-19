@@ -8,11 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
-
 def index(request):
-    login_form = LoginForm()
-    register_form = RegistrationForm()
-    return render(request, 'main/index.html', {'login_form': login_form, 'register_form' : register_form}) 
+    if request.user.is_authenticated:
+        return redirect('main:home')
+    else:
+        login_form = LoginForm()
+        register_form = RegistrationForm()
+        return render(request, 'main/index.html', {'login_form': login_form, 'register_form' : register_form}) 
 
 
 def register(request):
@@ -45,12 +47,12 @@ def user_login(request):
     return render(request, 'main/login_test.html', {'form': form})
 
 @login_required
-def profile(request, username):
+def user_profile(request, username):
     user = User.objects.get(username=username)
     return render(request, 'main/profile.html', {'user': user, 'profile': user.profile})
 
 @login_required
-def edit_profile(request):
+def edit_user_profile(request):
     if request.method == 'POST':
         form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
 
@@ -63,8 +65,11 @@ def edit_profile(request):
     else:
         form = ProfileEditForm(instance=request.user.profile)
         return render(request, 'main/edit_profile_test.html', {'form':form})
+        
 
-
+@login_required
+def home(request):
+    return render(request, 'main/home.html')
 
 
 

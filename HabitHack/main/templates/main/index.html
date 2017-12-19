@@ -1,15 +1,31 @@
 {% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+{% endblock %}
 
 {% block content %}
- <h2>Content will be here, soon!</h2>
- <form action="login/" method="post">
-    {% csrf_token %}
-    {{ login_form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<form action="register/" method="post">
-    {% csrf_token %}
-    {{ register_form.as_p }}
-    <button type="submit">Register</button>
-</form>
+<div class="forms">
+    <div class="login">
+        <img src="{% static 'images/layer-1.png' %}" alt="log in picture">
+        <form action="{% url 'main:login' %}" method="post">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+        <br>
+        <a href="url">Forgot your password?</a>
+        <br>
+        <button type="button" id="fb">Log in with Facebook</button>
+    </div>
+    <div class="register">
+        <img src="{% static 'images/layer-2.png' %}" alt="register picture">
+        <form action="{% url 'main:register' %}" method="post">
+            {% csrf_token %}
+            {{ register_form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

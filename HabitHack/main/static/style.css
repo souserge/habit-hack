@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Russo+One|Space+Mono');
+
 html, body {
   margin: 0;
   padding: 0;
@@ -28,10 +30,12 @@ header {
 }
 
 h1 {
-  font-weight: 400;
+  /* font-weight: 400; */
   padding-left: 10%;
   display: inline;
   font-size: 60px;
+  text-transform: uppercase;
+  font-family: 'Russo One', monospace;
 }
 
 ul {
@@ -97,6 +101,7 @@ footer {
 }
 
 #content-wrapper {
+  /* background: url('images/earth.gif'); */
   background-color: rgba(255, 205, 0,.5);
   margin: 0 10px 10px 10px;
 }
