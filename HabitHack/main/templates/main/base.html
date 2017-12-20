@@ -19,8 +19,7 @@
 
     <nav><ul>
       {% if request.user.is_authenticated %}
-        <li id="login-button"><a href="{% url "main:logout" %}">
-        </a></li>
+        <li id="login-button"><a href="{% url "main:logout" %}"></a></li>
         <li><a href="{% url 'main:user' username=request.user.username %}">Profile</a></li>
         <li><a>Groups</a></li>
         <li><a href="{% url 'main:home' %}">Home</a></li>
