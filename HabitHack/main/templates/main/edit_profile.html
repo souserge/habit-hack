@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+<link rel="stylesheet" type="text/css" href="{% static 'edit_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<form enctype="multipart/form-data" action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+{% endblock %}

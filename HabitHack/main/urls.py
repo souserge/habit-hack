@@ -6,8 +6,6 @@ from django.contrib.auth.views import(
 )
 from . import views
 
-
-
 app_name = 'main'
 urlpatterns = [
     url(r'^$', views.index, name = 'index'),

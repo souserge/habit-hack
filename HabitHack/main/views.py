@@ -7,6 +7,7 @@ from .forms import RegistrationForm, ProfileEditForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_http_methods
 
 def index(request):
     if request.user.is_authenticated:
@@ -17,39 +18,36 @@ def index(request):
         return render(request, 'main/index.html', {'login_form': login_form, 'register_form' : register_form}) 
 
 
+@require_http_methods(["POST"])
 def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('main:index')
-    else:
-        form = RegistrationForm()
-    return render(request, 'main/register_test.html', {'form': form})
+    form = RegistrationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(request, user)
+        return redirect('main:index')
 
+
+@require_http_methods(["POST"])
 def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('main:index')
-        else:
-            return HttpResponse("Error in logging in")
+    form = LoginForm(data=request.POST)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=raw_password)
+        login(request, user)
+        return redirect('main:index')
     else:
-        form = LoginForm()
-    return render(request, 'main/login_test.html', {'form': form})
+        return HttpResponse("Error in logging in")
+
 
 @login_required
 def user_profile(request, username):
     user = User.objects.get(username=username)
     return render(request, 'main/profile.html', {'user': user, 'profile': user.profile})
+
 
 @login_required
 def edit_user_profile(request):
@@ -58,13 +56,12 @@ def edit_user_profile(request):
 
         if form.is_valid():
             form.save(commit=True)
-            return redirect('main:profile')
+            return redirect('main:user', username=request.user.username)
         else:
-            return render(request, 'main/edit_profile_test.html', {'form': form})
-
+            return render(request, 'main/edit_profile.html', {'form': form})
     else:
         form = ProfileEditForm(instance=request.user.profile)
-        return render(request, 'main/edit_profile_test.html', {'form':form})
+        return render(request, 'main/edit_profile.html', {'form':form})
         
 
 @login_required

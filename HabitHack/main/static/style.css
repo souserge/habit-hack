@@ -30,7 +30,6 @@ header {
 }
 
 h1 {
-  /* font-weight: 400; */
   padding-left: 10%;
   display: inline;
   font-size: 60px;
@@ -101,7 +100,6 @@ footer {
 }
 
 #content-wrapper {
-  /* background: url('images/earth.gif'); */
   background-color: rgba(255, 205, 0,.5);
   margin: 0 10px 10px 10px;
 }

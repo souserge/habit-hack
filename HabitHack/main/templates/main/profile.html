@@ -13,8 +13,7 @@
 <div class="Town-country"><!--user location-->{{ profile.city }}, {{ profile.country }}</div>
 <div class="desc">
   <!--profile description-->
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-  Praesent varius auctor sem in pulvinar. Nullam ac mattis ante. 
+  {{ profile.description }}
 </div>
 {% if request.user != user %}
 <div class="mssg_button">
@@ -58,5 +57,4 @@
     </div>
   </div></a>
 {% endif %}
-
 {% endblock %}
