@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import View
 from django.views import generic
 from django.views.generic.base import TemplateView
-from .forms import RegistrationForm, ProfileEditForm, LoginForm
+from .forms import RegistrationForm, ProfileEditForm, LoginForm, UserEditForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -49,20 +49,39 @@ def user_profile(request, username):
     return render(request, 'main/profile.html', {'user': user, 'profile': user.profile})
 
 
+# @login_required
+# def edit_user_profile(request):
+#     if request.method == 'POST':
+#         form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
+
+#         if form.is_valid():
+#             form.save(commit=True)
+#             return redirect('main:user', username=request.user.username)
+#         else:
+#             return render(request, 'main/edit_profile.html', {'form': form})
+#     else:
+#         form = ProfileEditForm(instance=request.user.profile)
+#         return render(request, 'main/edit_profile.html', {'form':form})
+        
 @login_required
 def edit_user_profile(request):
     if request.method == 'POST':
-        form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
-
-        if form.is_valid():
-            form.save(commit=True)
+        user_form = UserEditForm(request.POST, instance=request.user)
+        user_profile_form = ProfileEditForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and user_profile_form.is_valid():
+            user_form.save(commit=True)
+            user_profile_form.save(commit=True)
             return redirect('main:user', username=request.user.username)
         else:
-            return render(request, 'main/edit_profile.html', {'form': form})
+            return render(request, 'main/edit_profile.html', {'user_form': user_form, 
+    'user_profile_form' : user_profile_form})
     else:
-        form = ProfileEditForm(instance=request.user.profile)
-        return render(request, 'main/edit_profile.html', {'form':form})
-        
+        user_form = UserEditForm(instance=request.user)
+        user_profile_form = ProfileEditForm(instance=request.user.profile)
+        return render(request, 'main/edit_profile.html', {'user_form': user_form,
+    'user_profile_form' : user_profile_form})
+
+
 
 @login_required
 def home(request):

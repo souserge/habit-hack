@@ -42,6 +42,34 @@ class LoginForm(AuthenticationForm):
         self.fields['username'].widget = forms.TextInput(attrs={'placeholder': 'Username'})
 
 
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            # these ones should be added
+            # 'first_name', 'last_name', 
+
+            'first_name', 'last_name'
+            
+            # these ones we don't actually need
+            # 'birth_date','gender',
+            
+            # and these should be availible as well
+            # 'password', 'confirm_password', 'email', 'confirm_email',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['first_name', 'last_name']:
+            self.fields[fieldname].help_text = None
+            self.fields[fieldname].label = ""
+
+        self.fields['first_name'].widget = forms.TextInput(attrs={'placeholder': 'First Name'})
+        self.fields['last_name'].widget = forms.TextInput(attrs={'placeholder': 'Last Name'})
+
+
+
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -49,7 +77,7 @@ class ProfileEditForm(forms.ModelForm):
             # these ones should be added
             # 'first_name', 'last_name', 
 
-            'city', 'country', 'description', 'profile_photo',
+           'city', 'country', 'description', 'profile_photo',
             
             # these ones we don't actually need
             # 'birth_date','gender',
