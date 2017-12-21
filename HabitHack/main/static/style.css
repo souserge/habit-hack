@@ -20,7 +20,6 @@ html, body {
   height: 100%;
 }
 
-
 header {
   margin: 0;
   padding: 10px;
@@ -39,8 +38,10 @@ h1 {
   padding-left: 10%;
   display: inline-block;
   font-size: 60px;
-  text-transform: uppercase;
   margin: 0;
+
+  font-weight: 400;
+  text-transform: uppercase;
   font-family: 'Russo One', monospace;
 }
 
@@ -94,6 +95,12 @@ nav li:last-child {
 }
 
 #login-button {
+  width: 32px;
+  height: 32px;
+}
+
+#login-button a {
+  padding: 0;
   width: 32px;
   height: 32px;
   background-image: url('https://i.imgur.com/iuH0DIJ.jpg');
