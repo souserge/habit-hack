@@ -130,15 +130,15 @@
 }
 
 .mssg_img{
-  position:absolute;
+  position: absolute;
   display:inline-block;
   margin-top:5px;
   margin-left:20px;
 }
 
 /*groups button */
-.groups_button{
-  position:absolute;
+.groups_button {
+  position: absolute;
   margin-top:291px;
   margin-left:448px;
   width: 180px;
