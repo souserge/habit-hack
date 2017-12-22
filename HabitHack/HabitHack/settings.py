@@ -129,5 +129,8 @@ MEDIA_URL = '/media/'
 
 AUTH_PROFILE_MODULE = 'main.UserProfile'
 
-LOGIN_URL = '/login/'
+#LOGIN_URL = '/login/'
+#LOGIN_URL = '/index/'
+#LOGIN_REDIRECT_URL = '/home/'
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
