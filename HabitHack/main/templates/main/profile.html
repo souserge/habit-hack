@@ -3,6 +3,7 @@
 
 {% block extra_head %}
 <link rel="stylesheet" type="text/css" href="{% static 'profile.css' %}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
 
 {% block content %}
@@ -53,7 +54,7 @@
 {% else %}
   <a href="{% url 'main:edit_user' %}"><div class="edit_button">
     <div class="button_text">
-      Settings
+      Edit Profile
     </div>
   </div></a>
 {% endif %}
