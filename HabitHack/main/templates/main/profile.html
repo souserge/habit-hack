@@ -10,8 +10,20 @@
 <div class="Photo">
   <!--profile photo-->
   <img src="{{ profile.profile_photo.url }}"></img></div>
-<div class="Name"><!--username-->{{ user.first_name }} {{ user.last_name }}</div>
-<div class="Town-country"><!--user location-->{{ profile.city }}, {{ profile.country }}</div>
+  <div class="Name"><!--username-->
+  {% if user.first_name or user.last_name %}
+    {{ user.first_name }} {{ user.last_name }}
+  {% else %}
+    *Your name should be here*
+  {% endif %}
+  </div>
+<div class="Town-country"><!--user location-->
+  {% if profile.city or profile.country %}
+    {{ profile.city }}, {{ profile.country }}
+  {% else %}
+    *Your location should be here, please add it in your settings*
+  {% endif %}
+</div>
 <div class="desc">
   <!--profile description-->
   {{ profile.description }}
