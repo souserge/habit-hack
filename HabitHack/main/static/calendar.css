@@ -1,0 +1,42 @@
+#habits-table {
+    background-color: #E6F4F7;
+}
+
+.habit-row {
+    background-color: rgb(255, 255, 255);
+}
+
+.habit-cell {
+    background-color: rgb(255, 255, 255);
+}
+
+.habit-cell-btn-day{
+    top: 30px;
+    position: relative;
+    font-size: 30px;
+}
+
+.habit-cell-btn-circle{
+    position: relative;
+    top: 5px;
+    left: 5px;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background-color: #E6F4F7;
+}
+
+.habit-cell-btn{
+    position: relative;
+    text-align: center;
+    width: 110px;
+    height: 110px;
+    border-radius: 100%;
+
+    background-color:#39B4CC;
+    background-image:
+        linear-gradient(91deg, transparent 50%, #A2ECFB 50%),
+        linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
+    
+}
