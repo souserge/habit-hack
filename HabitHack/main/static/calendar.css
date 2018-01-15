@@ -10,33 +10,51 @@
     background-color: rgb(255, 255, 255);
 }
 
-.habit-cell-btn-day{
-    top: 30px;
+.habit-cell-btn-day {
+    top: 23%;
     position: relative;
     font-size: 30px;
 }
 
-.habit-cell-btn-circle{
+.habit-cell-btn-circle {
     position: relative;
-    top: 5px;
-    left: 5px;
     text-align: center;
-    width: 100px;
-    height: 100px;
     border-radius: 100%;
     background-color: #E6F4F7;
 }
 
-.habit-cell-btn{
+.habit-cell-btn {
     position: relative;
     text-align: center;
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
     border-radius: 100%;
-
     background-color:#39B4CC;
+}
+
+.habit-cell-btn_active {
     background-image:
         linear-gradient(91deg, transparent 50%, #A2ECFB 50%),
         linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
-    
+}
+
+.habit-cell-btn_inactive {
+    left: 3px;
+    width: 84px;
+    height: 84px;
+    background-color: #A2ECFB;
+}
+
+.habit-cell-btn-circle_active {
+    top: 5px;
+    left: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+.habit-cell-btn-circle_inactive {
+    top: 2px;
+    left: 2px;
+    width: 80px;
+    height: 80px;
 }
