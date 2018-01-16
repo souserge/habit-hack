@@ -24,10 +24,9 @@ class Habit(models.Model):
     user_id = models.PositiveIntegerField(blank=False)
     cat_id = models.PositiveIntegerField(blank=False)
     name = models.CharField(max_length=50, default='', blank=False)
-    frequency_choice = (('M', 'Monthly'), ('W', "Weekly"), ('D', 'Daily'))
-    frequency = models.CharField(max_length=7, choices=frequency_choice, blank=False)
     description = models.CharField(max_length=500, default='', blank=True)
-    counter = models.PositiveIntegerField(blank=False)
+    weekdays = models.CharField(max_length=30, default='', blank=False)
+    numRepeats = models.PositiveIntegerField(default=1, blank=False)
 
 
 class Category(models.Model):
