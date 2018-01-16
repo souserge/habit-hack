@@ -173,9 +173,3 @@ def edit_user_profile(request):
 
 
 
-@login_required
-def home(request):
-    return render(request, 'main/home.html')
-
-
-
