@@ -1,3 +1,16 @@
+(function() {
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    Date.prototype.getMonthName = function() {
+        return months[ this.getMonth() ];
+    };
+    Date.prototype.getDayName = function() {
+        return days[ this.getDay() ];
+    };
+})();
+
 // Define classes
 class Habit {
     constructor(id, name, weekdays, numRepeats) {
@@ -115,8 +128,6 @@ $(() => {
         let date = getDate(dayOffset);
         let rec = habit.incrementRecord(date);
 
-        $(this).find(".habit-cell-btn-text").first().text(rec.counter);
-
         drawSector(rec.counter / habit.numRepeats, $(this));
    });
 });
@@ -124,12 +135,11 @@ $(() => {
 
 function createHeader($table) {
     let appendStr = '<tr class="days-row">';
-    
 
     for (let i = 6; i >= 0; i--) {
         let d = getDate(i);
         appendStr += '<th class="day-cell">';
-        appendStr += d.toDateString();
+        appendStr += d.getDayName().substring(0, 3);
         appendStr += '</th>';
     }
     appendStr += '</tr>';
@@ -141,11 +151,9 @@ function createHabitRow(habit, $table) {
 
     for (let i = 6; i >= 0; i--) {
         let date = getDate(i);
-        let counter = habit.getDateCounter(date) || 0;
-        let dow = date.getDay();
 
         appendStr += '<td class="habit-cell" value="' + i + '">';
-        appendStr += habit.isActiveWeekday(dow) ? createDayCell(habit.numRepeats, counter) : createDayCell(-1, counter);
+        appendStr += createDayCell(habit.isActiveWeekday(date.getDay()), date.getDate());
         appendStr += '</td>';
     }
 
@@ -156,15 +164,12 @@ function createHabitRow(habit, $table) {
 }
 
 
-function createDayCell(goal, counter) {
-    return goal != -1 
-            ?   '<div class="habit-cell-btn habit-cell-btn_active">'
-                + '<div class="habit-cell-btn-circle habit-cell-btn-circle_active">'
-                + '<span class="habit-cell-btn-text">' + counter + '</span>\\' + goal
-                + '</div></div>'
-            :   '<div class="habit-cell-btn habit-cell-btn_inactive">'
-                + '<div class="habit-cell-btn-circle habit-cell-btn-circle_inactive">'
-                + '</div></div>';
+function createDayCell(isActive, dayOfMonth) {
+    let state = isActive ? 'active' : 'inactive';
+    return '<div class="habit-cell-btn habit-cell-btn_' + state + '">'
+            + '<div class="habit-cell-btn-circle habit-cell-btn-circle_' + state + '">'
+            + '<span class="habit-cell-btn-text">' + dayOfMonth + '</span>'
+            + '</div></div>';
 }
 
 function drawSector(prec, $border) {
