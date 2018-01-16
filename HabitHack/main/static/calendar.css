@@ -1,5 +1,5 @@
 #habits-table {
-    background-color: #E6F4F7;
+    background-color: rgb(255, 255, 255);
 }
 
 .habit-row {
@@ -10,8 +10,8 @@
     background-color: rgb(255, 255, 255);
 }
 
-.habit-cell-btn-day {
-    top: 23%;
+.habit-cell-btn-text {
+    top: 20%;
     position: relative;
     font-size: 30px;
 }
@@ -20,41 +20,42 @@
     position: relative;
     text-align: center;
     border-radius: 100%;
-    background-color: #E6F4F7;
+    background-color: rgb(255, 255, 255);
 }
 
 .habit-cell-btn {
     position: relative;
     text-align: center;
-    width: 90px;
-    height: 90px;
     border-radius: 100%;
-    background-color:#39B4CC;
+    background-color:#559bb3;
 }
 
 .habit-cell-btn_active {
+    width: 82px;
+    height: 82px;
+
     background-image:
-        linear-gradient(91deg, transparent 50%, #A2ECFB 50%),
+        linear-gradient(90deg, transparent 50%, #A2ECFB 50%),
         linear-gradient(90deg, #A2ECFB 50%, transparent 50%);
 }
 
 .habit-cell-btn_inactive {
-    left: 3px;
-    width: 84px;
-    height: 84px;
+    left: 4px;
+    width: 74px;
+    height: 74px;
     background-color: #A2ECFB;
 }
 
 .habit-cell-btn-circle_active {
-    top: 5px;
-    left: 5px;
-    width: 80px;
-    height: 80px;
+    top: 6%;
+    left: 6%;
+    width: 88%;
+    height: 88%;
 }
 
 .habit-cell-btn-circle_inactive {
-    top: 2px;
-    left: 2px;
-    width: 80px;
-    height: 80px;
+    /* top: 2px;
+    left: 2px; */
+    width: 100%;
+    height: 100%;
 }
