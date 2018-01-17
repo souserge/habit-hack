@@ -28,7 +28,7 @@ def home(request):
             'id': habit.id,
             'name': habit.name,
             'weekdays': habit.weekdays,
-            'num_repeats': habit.numRepeats,
+            'num_repeats': habit.num_repeats,
             'history': records
         })
 
