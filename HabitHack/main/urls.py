@@ -5,6 +5,7 @@ from django.contrib.auth.views import(
     LogoutView,
 )
 from . import views
+from . import home_views
 
 #DO NOT DELETE COMMENTED LINES! (STILL TESTING)
 
@@ -23,5 +24,5 @@ urlpatterns = [
     #url(r'^register/$', views.MainView.as_view(), name='register'),
     path('user/<username>/', views.user_profile, name='user'),
     path('settings/', views.edit_user_profile, name='edit_user'),
-    path('home/', views.home, name='home'),
+    path('home/', home_views.home, name='home'),
 ]

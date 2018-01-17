@@ -19,20 +19,25 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Habit(models.Model):
+class UserHabit(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.PositiveIntegerField(blank=False)
-    cat_id = models.PositiveIntegerField(blank=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='', blank=False)
-    frequency_choice = (('M', 'Monthly'), ('W', "Weekly"), ('D', 'Daily'))
-    frequency = models.CharField(max_length=7, choices=frequency_choice, blank=False)
     description = models.CharField(max_length=500, default='', blank=True)
-    counter = models.PositiveIntegerField(blank=False)
+    weekdays = models.CharField(max_length=30, default='', blank=False)
+    num_repeats = models.PositiveIntegerField(default=1, blank=False)
 
+    def __str__(self):
+        return str(self.user) + ': ' + self.name
 
-class Category(models.Model):
+class HabitHistory(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, default='', blank=False)
+    user_habit = models.ForeignKey(UserHabit, on_delete=models.CASCADE)
+    datehash = models.CharField(max_length=10, default='1970-01-01', blank=False)
+    counter = models.PositiveIntegerField(default=0, blank=False)
+
+    def __str__(self):
+        return str(self.user_habit) + ' - ' + self.datehash
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
