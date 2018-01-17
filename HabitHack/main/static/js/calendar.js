@@ -28,10 +28,10 @@ function hashToDate(hash) {
     return new Date(hash);
 }
 
-function getDate(dayOffset) {
-    let date = new Date();
-    date.setDate(date.getDate() - dayOffset);
-    return date;
+function getDate(dayOffset, date) {
+    let newDate = date!=null ? date : new Date();
+    newDate.setDate(newDate.getDate() - dayOffset);
+    return newDate;
 }
 
 
@@ -64,17 +64,25 @@ $(() => {
     });
 });
 
-
-
-function createHeader($table) {
-    let appendStrMonth = '<tr>';
+function createHeader($table, date) {
+    let appendStrMonth = '<tr class="days-row">';
     let appendStr = '<tr class="days-row">';
-    let monthName = new Date();
-    let button = '<button>' + 'Previous Week' + '</button>';
-    let button1 = '<button>' + 'Next week' + '</button>';
-    appendStrMonth += '<th>' + button + '</th>';
+    let monthName = date!=null ? date : new Date();
+    let button = document.createElement("button");
+    let button1 = document.createElement("button");
+    button.textContent = "Previous Week";
+    button1.textContent = "Next Week";
     appendStrMonth += '<th>' + monthName.getMonthName() + '</th>';
-    appendStrMonth += '<th>' + button1 + '</th>' + '</tr>';
+    button.onclick = function () {
+        let newDate = getDate(7);
+        monthName = newDate;
+        alert("New Date:" + newDate);
+    }
+    button1.onclick = function () {
+        let newDate = getDate(-7, monthName);
+        createHeader($table, newDate);
+        alert("New Date:" + newDate);
+    }
     for (let i = 6; i >= 0; i--) {
         let d = getDate(i);
         appendStr += '<th class="day-cell">';
@@ -84,6 +92,8 @@ function createHeader($table) {
     appendStr += '</tr>';
     $table.append(appendStrMonth);
     $table.append(appendStr);
+    $table.append(button);
+    $table.append(button1);
 }
 
 function createHabitRow(habit, $table) {
