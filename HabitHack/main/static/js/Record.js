@@ -1,6 +1,6 @@
 class Record {
-    constructor() {
-        this.counter = 1;
+    constructor(value) {
+        this.counter = value || 0;
     }
 
     incr() {
@@ -9,6 +9,10 @@ class Record {
 
     decr() {
         this.counter--;
+    }
+
+    set(num) {
+        this.counter = num;
     }
 
     isLowerThan(val) {

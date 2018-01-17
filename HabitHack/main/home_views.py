@@ -30,5 +30,5 @@ def home(request):
             'num_repeats': habit.num_repeats,
             'history': records
         })
-
+        
     return render(request, 'main/home.html', { 'habits': habits })
