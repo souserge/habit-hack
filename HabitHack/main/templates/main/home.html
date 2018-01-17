@@ -12,6 +12,7 @@
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
 
+<script src="{% static 'js/helperFunctions.js' %}"></script>
 <script src="{% static 'js/Record.js' %}"></script>
 <script src="{% static 'js/Habit.js' %}"></script>
 
@@ -20,7 +21,8 @@
   let id;
   let weekdays;
   let numRepeats;
-  let habit;  
+  let habit; 
+  let rec; 
 </script>
 
 {% for habit in habits %}
@@ -30,6 +32,16 @@
       weekdays = "{{habit.weekdays}}".split(",").map(str => parseInt(str));
       numRepeats = parseInt("{{habit.num_repeats}}");
       habit = new Habit(id, name, new Set(weekdays), numRepeats);
+  </script>
+  {% for key, value in habit.history.items %}
+    <script>
+        console.log("{{key}}");
+        habit.addRecord("{{key}}", parseInt("{{value}}"));
+    </script>
+  {% endfor %}
+
+  <script>
+      console.log(habit);
       habits.push(habit);
   </script>
 {% endfor %}

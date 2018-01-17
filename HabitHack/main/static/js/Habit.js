@@ -13,11 +13,18 @@ class Habit {
         if (!rec) {
             if (this.isActiveWeekday(date.getDay())) {
                 rec = new Record();
+                rec.incr();
                 this.history.set(dateHash, rec);
             }
         } else if (rec.isLowerThan(this.numRepeats)) {
             rec.incr();
         }
+        return rec;
+    }
+
+    addRecord(dateHash, value) {
+        let rec = new Record(value);
+        this.history.set(dateHash, rec);
         return rec;
     }
 
@@ -35,6 +42,10 @@ class Habit {
 
     getDateCounter(date) {
         let rec = this.history.get(dateToHash(date));
-        return rec ? rec.counter : undefined;
+        return rec ? rec.counter : 0;
+    }
+
+    percentDone(date) {
+        return this.getDateCounter(date) / this.numRepeats;
     }
 }

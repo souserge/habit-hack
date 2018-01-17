@@ -1,72 +1,47 @@
-(function () {
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    Date.prototype.getMonthName = function () {
-        return months[this.getMonth()];
-    };
-    Date.prototype.getDayName = function () {
-        return days[this.getDay()];
-    };
-})();
-
-
-// Define helper functions
-function pad(str, max) {
-    return str.length < max ? pad('0' + str, max) : str;
-}
-
-function dateToHash(date) {
-    let y = date.getYear();
-    let m = date.getMonth();
-    let d = date.getDate();
-    return pad(y.toString(), 4) + '-' + pad(m.toString(), 2) + '-' + pad(d.toString(), 2);
-}
-
-function hashToDate(hash) {
-    return new Date(hash);
-}
-
-function getDate(dayOffset) {
-    let date = new Date();
-    date.setDate(date.getDate() - dayOffset);
-    return date;
-}
-
-
-
-
-// Define sample data
-let pushups = new Habit(0, "Pushups", new Set([0, 1, 2, 3, 4, 5, 6]), 30);
-let guitar = new Habit(1, "Guitar", new Set([0, 4, 5, 2]), 3);
-let swimming = new Habit(2, "Swimming", new Set([1, 3, 6]), 1);
-// habits = [pushups, guitar, swimming];
-
 $(() => {
     console.log('jQuery works!');
-    let $table = $('#habits-table');
-    createHeader($table);
+    createHabitTable();
 
-    for (let habit of habits) {
-        createHabitRow(habit, $table)
-    }
-
-    $('.habit-cell-btn_active').on('click', function (ev) {
-        let dayOffset = parseInt($(this).closest('.habit-cell').attr('value'));
-        let habitId = parseInt($(this).closest('.habit-row').attr('value'));
-        let habit = habits.find((h) => h.id == habitId);
-
-        let date = getDate(dayOffset);
-        let rec = habit.incrementRecord(date);
-
-        drawSector(rec.counter / habit.numRepeats, $(this));
+    $('.habit-cell-btn_active').on('click', function () {
+        let habit = findHabit($(this));
+        let date  = findHabitDate($(this));
+        habit.incrementRecord(date);
+        drawSector(habit.percentDone(date), $(this));
     });
 });
 
+function createHabitTable() {
+    let $table = $('#habits-table');
+    createHabitHeader($table);
 
+    for (let habit of habits) {
+        createHabitRow(habit, $table);
+    }
 
-function createHeader($table) {
+    $('.habit-cell-btn_active').each(function() {
+        console.log("hi");
+        refreshSlider($(this));
+    });
+}
+
+function refreshSlider($habitCell) {
+    let habit = findHabit($habitCell);
+    let date  = findHabitDate($habitCell);
+    console.log(dateToHash(date));
+    drawSector(habit.percentDone(date), $habitCell);
+}
+
+function findHabit($habitCell) {
+    let habitId = parseInt($habitCell.closest('.habit-row').attr('value'));
+    return habits.find((h) => h.id == habitId);
+}
+
+function findHabitDate($habitCell) {
+    let dayOffset = parseInt($habitCell.closest('.habit-cell').attr('value'));
+    return getDate(dayOffset);
+}
+
+function createHabitHeader($table) {
     let appendStrMonth = '<tr>';
     let appendStr = '<tr class="days-row">';
     let monthName = new Date();
@@ -94,7 +69,7 @@ function createHabitRow(habit, $table) {
 
         appendStr += '<td class="habit-cell" value="' + i + '">';
         appendStr += createDayCell(habit.isActiveWeekday(date.getDay()), date.getDate());
-        appendStr += '</td>';
+        appendStr += '</td>';     
     }
 
     appendStr += '<td class="habit-cell-name">' + habit.name + '</td>';
