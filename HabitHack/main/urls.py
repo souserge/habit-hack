@@ -25,4 +25,5 @@ urlpatterns = [
     path('user/<username>/', views.user_profile, name='user'),
     path('settings/', views.edit_user_profile, name='edit_user'),
     path('home/', home_views.home, name='home'),
+    path('increment_counter/', home_views.increment_counter, name='increment_counter'),
 ]

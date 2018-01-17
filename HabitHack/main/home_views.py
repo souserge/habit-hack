@@ -32,3 +32,25 @@ def home(request):
         })
         
     return render(request, 'main/home.html', { 'habits': habits })
+
+@login_required
+def increment_counter(request):
+    habit_id = request.POST.get('habit_id', None)
+    datehash = request.POST.get('datehash', None)
+    print(habit_id + ', ' + datehash)
+    if habit_id and datehash:
+        habit = UserHabit.objects.get(id=int(habit_id))
+        if habit.user == request.user:
+            counter = 0
+
+            rec = None
+            try:
+                rec = HabitHistory.objects.filter(user_habit=habit).get(datehash=datehash)
+                coutner = rec.counter + 1
+                rec.counter = counter
+                rec.save()
+            except HabitHistory.DoesNotExist:
+                counter = 1
+                rec = HabitHistory.objects.create(user_habit=habit, datehash=datehash, counter=counter)
+
+            return HttpResponse(counter)

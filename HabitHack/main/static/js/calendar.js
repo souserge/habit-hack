@@ -5,8 +5,16 @@ $(() => {
     $('.habit-cell-btn_active').on('click', function () {
         let habit = findHabit($(this));
         let date  = findHabitDate($(this));
-        habit.incrementRecord(date);
-        drawSector(habit.percentDone(date), $(this));
+        $.ajax({
+            url: '/increment_counter/',
+            type: 'POST',
+            data: { 'habit_id': habit.id, 'datehash': dateToHash(date) },
+            success: (response) => {
+                console.log('database updated');
+                habit.incrementRecord(date);
+                drawSector(habit.percentDone(date), $(this));
+            }
+        });
     });
 });
 
