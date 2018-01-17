@@ -22,9 +22,9 @@ def home(request):
         habit_records = HabitHistory.objects.filter(user_habit_id=habit.id)
         records = {}
         for rec in habit_records:
-            records.add(rec.datehash, rec.counter)
+            records[rec.datehash] = rec.counter
 
-        habits.add({ 
+        habits.append({ 
             'id': habit.id,
             'name': habit.name,
             'weekdays': habit.weekdays,
