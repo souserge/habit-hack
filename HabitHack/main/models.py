@@ -21,17 +21,23 @@ class UserProfile(models.Model):
 
 class UserHabit(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='', blank=False)
     description = models.CharField(max_length=500, default='', blank=True)
     weekdays = models.CharField(max_length=30, default='', blank=False)
     num_repeats = models.PositiveIntegerField(default=1, blank=False)
 
+    def __str__(self):
+        return str(self.user) + ': ' + self.name
+
 class HabitHistory(models.Model):
     id = models.AutoField(primary_key=True)
-    user_habit_id = models.ForeignKey(UserHabit, on_delete=models.CASCADE)
+    user_habit = models.ForeignKey(UserHabit, on_delete=models.CASCADE)
     datehash = models.CharField(max_length=10, default='1970-01-01', blank=False)
     counter = models.PositiveIntegerField(default=0, blank=False)
+
+    def __str__(self):
+        return str(self.user_habit) + ' - ' + self.datehash
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
