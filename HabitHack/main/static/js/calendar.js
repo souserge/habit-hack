@@ -41,7 +41,7 @@ function getDate(dayOffset) {
 let pushups = new Habit(0, "Pushups", new Set([0, 1, 2, 3, 4, 5, 6]), 30);
 let guitar = new Habit(1, "Guitar", new Set([0, 4, 5, 2]), 3);
 let swimming = new Habit(2, "Swimming", new Set([1, 3, 6]), 1);
-habits = [pushups, guitar, swimming];
+// habits = [pushups, guitar, swimming];
 
 $(() => {
     console.log('jQuery works!');
