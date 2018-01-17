@@ -13,6 +13,13 @@
 {% endblock %}
 
 {% block content %}
+
+<ul>
+  {% for habit in habits %}
+    <li>{{ habit.name }}</li>
+  {% endfor %}
+</ul>
+
 <table id="habits-table">
 
 </table>
