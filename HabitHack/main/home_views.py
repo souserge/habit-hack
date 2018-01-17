@@ -13,13 +13,12 @@ from .models import UserHabit, HabitHistory
 
 @login_required
 def home(request):
-    user = request.user
-    user_habits = UserHabit.objects.filter(user_id=user.id)
+    user_habits = UserHabit.objects.filter(user=request.user)
 
     habits = []
 
     for habit in user_habits:
-        habit_records = HabitHistory.objects.filter(user_habit_id=habit.id)
+        habit_records = HabitHistory.objects.filter(user_habit=habit)
         records = {}
         for rec in habit_records:
             records[rec.datehash] = rec.counter
