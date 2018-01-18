@@ -16,6 +16,11 @@ $(() => {
 let weekOffset = 0;
 
 function updateTable() {
+    if (habits.length <= 0) {
+        $('#month-name').text("No habits added :(");
+        return;
+    }
+    
     let date = getDate(weekOffset*7)
     $('#month-name').text(date.getMonthName());
 
