@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
-from .models import UserProfile
+from .models import UserProfile, UserHabit
 
 
 class RegistrationForm(UserCreationForm):
@@ -113,3 +113,8 @@ class ProfileEditForm(forms.ModelForm):
         self.fields['country'].widget = forms.TextInput(attrs={'placeholder': 'Country'})
         self.fields['description'].widget = forms.Textarea(attrs={'placeholder' : 'Write about yourself'})
 
+
+class HabitEditForm(forms.ModelForm):
+    class Meta:
+        model = UserHabit
+        fields = ['name', 'description', 'weekdays', 'num_repeats']

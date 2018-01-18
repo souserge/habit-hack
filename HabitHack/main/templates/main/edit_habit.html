@@ -1,0 +1,11 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<form enctype="multipart/form-data" action="" method="post">
+  {% csrf_token %}
+  {{ habit_form.as_p }}
+  <button type="submit">Edit habit</button>
+</form>
+<a href="{% url 'main:delete_habit' habit_id=habit_id %}"><button>Delete habit</button></a>
+{% endblock %}

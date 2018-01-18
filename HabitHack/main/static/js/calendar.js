@@ -1,8 +1,29 @@
 $(() => {
+    updateTable();
+
+    $('#prev-week').on('click', function (ev) {
+        weekOffset += 1;
+        
+        updateTable();
+    });
+
+    $('#next-week').on('click', function (ev) {
+        if (weekOffset > 0) weekOffset -= 1;
+        updateTable();
+    });
+});
+
+let weekOffset = 0;
+
+function updateTable() {
+    let date = getDate(weekOffset*7)
+    $('#month-name').text(date.getMonthName());
+
     console.log('jQuery works!');
     createHabitTable();
 
-    $('.habit-cell-btn_active').on('click', function () {
+    $('.habit-cell-btn_active').on('click', function (ev) {
+        ev.preventDefault();
         let habit = findHabit($(this));
         let date  = findHabitDate($(this));
         $.ajax({
@@ -16,10 +37,11 @@ $(() => {
             }
         });
     });
-});
+}
 
 function createHabitTable() {
     let $table = $('#habits-table');
+    $table.children().remove();
     createHabitHeader($table);
 
     for (let habit of habits) {
@@ -27,7 +49,6 @@ function createHabitTable() {
     }
 
     $('.habit-cell-btn_active').each(function() {
-        console.log("hi");
         refreshSlider($(this));
     });
 }
@@ -35,7 +56,6 @@ function createHabitTable() {
 function refreshSlider($habitCell) {
     let habit = findHabit($habitCell);
     let date  = findHabitDate($habitCell);
-    console.log(dateToHash(date));
     drawSector(habit.percentDone(date), $habitCell);
 }
 
@@ -46,26 +66,18 @@ function findHabit($habitCell) {
 
 function findHabitDate($habitCell) {
     let dayOffset = parseInt($habitCell.closest('.habit-cell').attr('value'));
-    return getDate(dayOffset);
+    return getDate(dayOffset + weekOffset*7);
 }
 
 function createHabitHeader($table) {
-    let appendStrMonth = '<tr>';
     let appendStr = '<tr class="days-row">';
-    let monthName = new Date();
-    let button = '<button>' + 'Previous Week' + '</button>';
-    let button1 = '<button>' + 'Next week' + '</button>';
-    appendStrMonth += '<th>' + button + '</th>';
-    appendStrMonth += '<th>' + monthName.getMonthName() + '</th>';
-    appendStrMonth += '<th>' + button1 + '</th>' + '</tr>';
     for (let i = 6; i >= 0; i--) {
-        let d = getDate(i);
+        let d = getDate(i + weekOffset*7);
         appendStr += '<th class="day-cell">';
         appendStr += d.getDayName().substring(0, 3);
         appendStr += '</th>';
     }
     appendStr += '</tr>';
-    $table.append(appendStrMonth);
     $table.append(appendStr);
 }
 
@@ -73,14 +85,14 @@ function createHabitRow(habit, $table) {
     let appendStr = '<tr class="habit-row" value="' + habit.id + '">';
 
     for (let i = 6; i >= 0; i--) {
-        let date = getDate(i);
+        let date = getDate(i + weekOffset*7);
 
         appendStr += '<td class="habit-cell" value="' + i + '">';
         appendStr += createDayCell(habit.isActiveWeekday(date.getDay()), date.getDate());
         appendStr += '</td>';     
     }
 
-    appendStr += '<td class="habit-cell-name">' + habit.name + '</td>';
+    appendStr += '<td class="habit-cell-name"><a href="/habits/' + habit.id + '/">' + habit.name + '</a></td>';
 
     appendStr += '</tr>';
     $table.append(appendStr);
@@ -96,8 +108,13 @@ function createDayCell(isActive, dayOfMonth) {
 }
 
 function drawSector(prec, $border) {
-    if (prec >= 1)
+    if (prec >= 1) {
+        console.log("heey");
+        $border.find(".habit-cell-btn-circle").first().css('background-color', '#559bb3');
+        $border.find(".habit-cell-btn-circle").first().css('color', '#fff');        
         prec = 1;
+    }
+    
     let deg = prec * 360;
     if (deg <= 180) {
         $border.css('background-image', 'linear-gradient(' + (90 + deg) + 'deg, transparent 50%, #A2ECFB 50%),linear-gradient(90deg, #A2ECFB 50%, transparent 50%)');

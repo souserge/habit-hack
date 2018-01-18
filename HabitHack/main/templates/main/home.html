@@ -50,8 +50,22 @@
 {% endblock %}
 
 {% block content %}
+<div id="home-wrapper">
 
-<table id="habits-table">
+  <a href="{% url 'main:add_habit' %}" id="add-habit-btn">
+    <span>Add New Habit</span>
+  </a>
 
+  <div id="tracker-wrapper">
+    <div id="wrapper-wrapper">
+      <button id="prev-week">&lt</button>
+      <span id="month-name">Month</span>
+      <button id="next-week">&gt</button>
+    </div>
+    <div id="calendar-wrapper">
+      <table id="habits-table"></table>
+    </div>
+  </div>
+</div>
 </table>
 {% endblock %}

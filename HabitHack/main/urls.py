@@ -26,4 +26,7 @@ urlpatterns = [
     path('settings/', views.edit_user_profile, name='edit_user'),
     path('home/', home_views.home, name='home'),
     path('increment_counter/', home_views.increment_counter, name='increment_counter'),
+    path('habits/<habit_id>/', home_views.edit_habit, name='edit_habit'),
+    path('add_habit/', home_views.add_habit, name='add_habit'),
+    path('delete_habit/<habit_id>', home_views.delete_habit, name='delete_habit'),
 ]

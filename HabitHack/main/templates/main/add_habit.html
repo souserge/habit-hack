@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<form enctype="multipart/form-data" action="" method="post">
+  {% csrf_token %}
+  {{ habit_form.as_p }}
+  <button type="submit">Add new habit</button>
+</form>
+{% endblock %}

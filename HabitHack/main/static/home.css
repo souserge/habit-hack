@@ -1,3 +1,44 @@
+#home-wrapper {
+
+}
+
+#add-habit-btn {
+    width: 180px;
+    height: 30px;
+    display: block;
+    margin-top: 4%;
+    margin-left: 10%;
+    margin-bottom: 1%;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 5px 0 rgba(0, 0, 0, 0.75);
+    border: solid 0.1px #959595;
+    border-radius: 7.7px;
+    text-align:center;
+    font-size:18px;
+    color:black;
+}
+
+#tracker-wrapper {
+    background-color: #ffffff;
+    margin: 0 auto;
+    max-width: 90%;
+}
+
+#month-name {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+#calendar-wrapper {
+    margin: 0 auto;
+}
+
 #habits-table {
     margin: 60px auto auto auto;
+}
+
+#wrapper-wrapper {
+    display: block;
+    margin: 0 auto;
+    max-width: 30%;
 }
